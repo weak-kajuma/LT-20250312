@@ -1,0 +1,12 @@
+{
+  "name": "lt",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "pptx": "npx @marp-team/marp-cli slide.md --html --pptx --allow-local-files",
+    "pdf": "npx @marp-team/marp-cli slide.md --html --pdf --allow-local-files --pdf-outlines"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

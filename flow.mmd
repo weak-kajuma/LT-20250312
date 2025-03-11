@@ -1,0 +1,7 @@
+%%{init:{'theme':'forest'}}%%
+flowchart LR
+    A[Start: Llama-3.2-1B] --> B[Patch-Level Training 10B]
+    B ---> C[Token-Level Training 10B]
+    C ---> E[モデル評価]
+    A ---> D[Token-Level Training 20B]
+    D ---> E
