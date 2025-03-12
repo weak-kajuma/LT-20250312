@@ -116,6 +116,23 @@ markdown-it-mermaid: true
 
 ---
 
+<!-- スライド5：Patch-Level Trainingの学習フロー -->
+# 「Patch-Level Trainingの学習フロー」
+
+<div class="two-column">
+  <div class="text-col">
+    <ul>
+      <li><strong>from scratch</strong> (青線) と<br><strong>from patch-level</strong> (オレンジ線) の比較例</li>
+      <li><strong>TLT開始時の損失</strong>が高いが、その後の学習によって徐々に差は縮小し、同等以上の性能を出す</li>
+    </ul>
+  </div>
+  <div class="img-col">
+    <img src="./loss.png" alt="PLTの学習フロー" class="fit-image" />
+  </div>
+</div>
+
+---
+
 <!-- スライド4：Patch-Level Trainingのコスト削減 -->
 # 「Patch-Level Trainingのコスト削減」
 
@@ -129,23 +146,6 @@ markdown-it-mermaid: true
   </div>
   <div class="img-col">
     <img src="./intro.png" alt="PLTのコスト削減図" class="fit-image" />
-  </div>
-</div>
-
----
-
-<!-- スライド5：Patch-Level Trainingの学習フロー -->
-# 「Patch-Level Trainingの学習フロー」
-
-<div class="two-column">
-  <div class="text-col">
-    <ul>
-      <li><strong>from scratch</strong> (青線) と<br><strong>from patch-level</strong> (オレンジ線) の比較例</li>
-      <li><strong>TLT開始時の損失</strong>が高いが、その後の学習によって徐々に差は縮小し、同等以上の性能を出す</li>
-    </ul>
-  </div>
-  <div class="img-col">
-    <img src="./loss.png" alt="PLTの学習フロー" class="fit-image" />
   </div>
 </div>
 
@@ -225,3 +225,18 @@ markdown-it-mermaid: true
 # 「結論：PLTは現時点では最適解ではない」
 - PLTは学習コスト削減のメリットがあるが…<br>λを下げなければ精度が低い<br>λを下げると、学習コスト削減効果も薄れる<br>→ PLT選択のメリットは十分に得られない
 - **結論:現時点で継続事前学習において積極的にPLTを選択すべきでない**
+
+---
+
+# 「おまけ」
+<div class="two-column">
+  <div class="img-col">
+    <ul>
+      <li>この一通りの実験では<strong>8枚のH100</strong>を<strong>40時間</strong>ほど用いました</li>
+      <li>LLMの評価及び予備実験では以前GPU争奪戦でいただいたRTX4060Ti 8GBを使いました。ありがとうございます。</li>
+    </ul>
+  </div>
+  <div class="img-col">
+    <img src="./8xH100.png" alt="nvidia-smi of 8xH100" class="fit-image" />
+  </div>
+</div>
