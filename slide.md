@@ -90,11 +90,10 @@ markdown-it-mermaid: true
 
 <!-- スライド2：背景 & 課題 -->
 # 「LLMの事前学習、計算コストの問題」
-- 従来の事前学習は、LLMの規模拡大に伴い計算コストが非常に高い  
-- 継続事前学習は、既存モデルの知識更新や新データへの適応を低コストで実現する対策として注目されている  
-- 例として **Llama 3.3 Swallow** が挙げられる  
-- 赤ちゃんから育てるよりアメリカの学生に日本語を教える方が低コストようなもの
-- 継続事前学習によってコスト削減はされているものの、依然として高い部分が存在する  
+- 従来の事前学習は、LLMの規模拡大に伴い計算コストが非常に高い
+- 継続事前学習は、既存モデルの知識更新や新データへの適応を<br>低コストで実現する対策として注目
+- 例として **Llama 3.3 Swallow** が挙げられる
+- 継続事前学習によってコスト削減はされているが、<br>依然としてコストが高い
 
 ---
 
@@ -104,10 +103,10 @@ markdown-it-mermaid: true
 <div class="two-column">
   <div class="text-col">
     <ul>
-      <li><strong>Patch-Level Training (PLT)</strong> は、複数トークンを1つの「パッチ」にまとめて学習する</li>
-      <li>通常のLLMは1トークンずつ学習（Token-Level Training）</li>
-      <li>同じ計算量でより多くのデータを処理可能</li>
-      <li>情報損失を抑えつつ、学習コスト削減を狙う</li>
+      <li><strong>Patch-Level Training (PLT)</strong><br>複数トークンを1つの<b>パッチ</b>にまとめて学習する手法</li>
+      <li>通常のLLMは1トークンずつ<br>学習（Token-Level Training）</li>
+      <li>同じ計算量でより多くの<br>データを処理可能</li>
+      <li>情報損失を抑えつつ、<br>学習コスト削減を狙う</li>
     </ul>
   </div>
   <div class="img-col">
@@ -125,7 +124,7 @@ markdown-it-mermaid: true
     <ul>
       <li><strong>理論式</strong>：<br/>コスト削減 ＝ λ/K + (1−λ)</li>
       <li>λ: PLT割合, K: パッチサイズ</li>
-      <li>λを大きくするとパッチ部分が増え、コスト削減率は上がるが情報損失のリスクも増す</li>
+      <li>λを大きくするとパッチ部分が増加<br>→ コスト削減率は上がるが<br>情報損失のリスクも増す</li>
     </ul>
   </div>
   <div class="img-col">
@@ -141,9 +140,8 @@ markdown-it-mermaid: true
 <div class="two-column">
   <div class="text-col">
     <ul>
-      <li><strong>from scratch</strong> (青線) と <strong>from patch-level</strong> (オレンジ線) の比較例</li>
-      <li><strong>TLT開始時の損失が</strong> 高いが、その後の学習によって徐々に差は縮小するが追いつくことには至らず</li>
-      <li>同じ学習ステップでの比較結果を示す</li>
+      <li><strong>from scratch</strong> (青線) と<br><strong>from patch-level</strong> (オレンジ線) の比較例</li>
+      <li><strong>TLT開始時の損失</strong>が高いが、その後の学習によって徐々に差は縮小し、同等以上の性能を出す</li>
     </ul>
   </div>
   <div class="img-col">
@@ -152,9 +150,16 @@ markdown-it-mermaid: true
 </div>
 
 ---
+# Patch-Level Training Figure 1
+<img src="./model.png" alt="PLTの概念図" class="fit-image" />
 
+---
+# Patch-Level Training Figure 2
+<img src="./loss.png" alt="PLTの学習フロー" class="fit-image" />
+
+---
 <!-- スライド6：実験設定 -->
-# 「どうやって検証した？（実験設定）」
+# 「実験設定」
 - **元モデル:** meta-llama/Llama-3.2-1B  
 - **比較:**  
   - PLTを使用したモデル  
@@ -176,9 +181,9 @@ markdown-it-mermaid: true
 ---
 
 <!-- スライド8：学習損失 同じstep数 vs 同じ計算量 -->
-# 「実験結果：学習損失（同じstep数 vs 同じ計算量）」
+# 「実験結果：学習損失」
 - **同じstep数での比較**: Token-Level Training移行後、Baselineとの差は徐々に縮まるが最終的には追いつかず
-- **同じ計算量での比較**: PLTが最終的にBaselineに近づく、または上回る可能性が示唆されている
+- **同じ計算量での比較**: PLTのスコアがBaselineに近づく、あるいは上回る傾向が見られる
 
 <div class="two-column">
   <div class="img-col">
@@ -192,9 +197,9 @@ markdown-it-mermaid: true
 ---
 
 <!-- スライド9：pfgen-benchmark 同じstep数 vs 同じ計算量 -->
-# 「pfgen-benchmark：同じstep数 vs 同じ計算量」
+# 「実験結果：pfgen-benchmark」
 - **同じstep数での比較**: Token-Level Training移行後、Baselineとの差は徐々に縮まるものの最終的には追いつかず
-- **同じ計算量での比較**: PLTのスコアがBaselineに近づき、あるいは上回る傾向が見られる
+- **同じ計算量での比較**: PLTのスコアがBaselineに近づく、あるいは上回る傾向が見られる
 
 <div class="two-column">
   <div class="img-col">
@@ -209,16 +214,14 @@ markdown-it-mermaid: true
 
 <!-- スライド10：考察 -->
 # 「なぜこの結果になったのか？」
-- PLTはパッチの生成を学習することによるモデルの重みが破壊されている可能性
+- PLTでパッチの生成を学習することによるモデルの重みが<br>破壊されている可能性
 - Token-Level Trainingへの移行で損失は回復するが、学習を延長しても完全には追いつかない  
-- λを1/4など小さくすると改善の余地はあるが、学習コスト削減効果は低下するため慎重に検討が必要  
+- λを1/4など小さくすると改善の余地はあるが、学習コスト削減効果は低下するため慎重に検討が必要
+- 下流タスクでの性能比較が必要
 
 ---
 
 <!-- スライド11：まとめ -->
 # 「結論：PLTは現時点では最適解ではない」
-- PLTは学習コスト削減のメリットがあるが…
-  - λを下げなければ精度が低い
-  - λを下げると、学習コスト削減効果も薄れる
-- 結果、PLT選択のメリットは十分に得られない
-- **結論: 「現時点では継続事前学習において積極的にPLTを選択すべきではない」**
+- PLTは学習コスト削減のメリットがあるが…<br>λを下げなければ精度が低い<br>λを下げると、学習コスト削減効果も薄れる<br>→ PLT選択のメリットは十分に得られない
+- **結論:現時点で継続事前学習において積極的にPLTを選択すべきでない**
